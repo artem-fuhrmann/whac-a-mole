@@ -1,1 +1,14 @@
-<p>game-wrapper works!</p>
+<app-score [currentScore]="currentScore" [highestScore]="highestScore" />
+
+@if (!gameStarted) {
+<div class="game-start">
+  <button (click)="startGame()">Start</button>
+</div>
+} @else if(gameStarted) {
+<div class="game-grid">
+  @for (mole of moles(); track $index) {
+  <app-mole [isActive]="mole.isActive"> </app-mole>
+  }
+</div>
+<p>Time left: {{ timeLeft }}s</p>
+}

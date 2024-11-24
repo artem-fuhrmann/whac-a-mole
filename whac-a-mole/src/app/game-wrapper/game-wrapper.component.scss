@@ -1,0 +1,14 @@
+.game-start {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 300px;
+  outline: 5px black solid;
+}
+
+.game-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 160px);
+  gap: 50px;
+  justify-content: center;
+}

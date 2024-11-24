@@ -1,0 +1,13 @@
+.mole {
+  width: 150px;
+  height: 150px;
+  border-radius: 50%;
+  background-color: lightgray;
+  margin: 5px;
+  display: inline-block;
+  cursor: pointer;
+}
+
+.mole.active {
+  background-color: black;
+}
