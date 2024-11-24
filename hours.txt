@@ -1,0 +1,5 @@
+Architecture design: 45 hour
+Design implementation: 30 minutes
+Store implementation: 30 minutes
+Game logic implementation: 1 hour 45 minutes
+Testing: 30 minutes
