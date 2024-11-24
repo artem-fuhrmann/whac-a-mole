@@ -1,5 +1,5 @@
 import { inject, Injectable } from '@angular/core';
-import { GameState } from './state';
+import { GameState } from './mole-game.state';
 import { BehaviorSubject } from 'rxjs';
 
 @Injectable({

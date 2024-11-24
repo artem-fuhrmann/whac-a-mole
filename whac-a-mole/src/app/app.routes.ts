@@ -4,7 +4,7 @@ export const routes: Routes = [
   {
     path: '',
     loadComponent: () =>
-      import('./game-wrapper/game-wrapper.component').then(
+      import('./mole-game/game-wrapper/game-wrapper.component').then(
         (m) => m.GameWrapperComponent
       ),
   },

@@ -1,5 +1,6 @@
 import { inject } from '@angular/core';
-import { GameState, Mole, State } from './state';
+import { GameState } from './mole-game.state';
+import { Mole, State } from './mole-game.entities';
 
 export const randomizer = (moleState: State): Mole[] => {
   const moles = [];

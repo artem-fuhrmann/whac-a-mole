@@ -1,35 +1,21 @@
-import { patchState, signalStore, withMethods, withState } from '@ngrx/signals';
-import { randomizer } from './randomizer';
-import { inject } from '@angular/core';
-import { MoleService } from './mole.service';
-
-export type State = {
-  highestScore: number;
-  currentScore: number;
-  resetTime: boolean;
-  moles: Array<Mole>;
-  timer: number;
-  started: boolean;
-  stopped: boolean;
-};
-
-export interface Mole {
-  state: MoleStatus;
-  index: number;
-  lifeEnd?: number;
-}
-
-export enum MoleStatus {
-  Active = 1,
-  Inactive = 0,
-}
+import {
+  patchState,
+  signalStore,
+  withComputed,
+  withMethods,
+  withState,
+} from '@ngrx/signals';
+import { randomizer } from './mole-game-randomizer';
+import { computed, inject } from '@angular/core';
+import { MoleService } from './mole-game.service';
+import { Mole, MoleStatus, State } from './mole-game.entities';
 
 const INITIAL_STATE: State = {
   highestScore: 0,
   currentScore: 0,
   resetTime: false,
   moles: [],
-  timer: 30,
+  timer: 5,
   started: false,
   stopped: false,
 };
@@ -37,6 +23,11 @@ const INITIAL_STATE: State = {
 export const GameState = signalStore(
   { providedIn: 'root' },
   withState(INITIAL_STATE),
+  withComputed(({ ...state }) => ({
+    initialGame: computed(() => !state.started() && !state.stopped()),
+    gameStarted: computed(() => state.started() && !state.stopped()),
+    gameReplay: computed(() => !state.started() && state.stopped()),
+  })),
   withMethods((store) => ({
     startGame() {
       patchState(store, (state) => ({
@@ -44,7 +35,7 @@ export const GameState = signalStore(
         moles: randomizer(state),
         started: true,
         stopped: false,
-        timer: 30,
+        timer: 5,
       }));
     },
     stopGame() {

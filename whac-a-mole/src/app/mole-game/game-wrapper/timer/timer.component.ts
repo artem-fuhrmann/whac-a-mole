@@ -1,13 +1,20 @@
-import { Component, effect, inject, input } from '@angular/core';
-import { GameState } from '../state/state';
+import {
+  ChangeDetectionStrategy,
+  Component,
+  effect,
+  inject,
+  input,
+} from '@angular/core';
+import { GameState } from '../../mole-game.state';
 import { timer } from 'rxjs';
-import { MoleService } from '../state/mole.service';
+import { MoleService } from '../../mole-game.service';
 
 @Component({
   selector: 'app-timer',
   standalone: true,
   imports: [],
   providers: [MoleService],
+  changeDetection: ChangeDetectionStrategy.OnPush,
   templateUrl: './timer.component.html',
   styleUrl: './timer.component.scss',
 })
@@ -24,9 +31,11 @@ export class TimerComponent {
           this.moleService.updateGameField();
           this.state.decrementTimer();
         });
-
+        console.log(this.$timer());
         if (this.$timer() === 0) {
+          console.log('STTOPED');
           this.state.stopGame();
+          console.log(this.state.gameReplay());
           if (this.state.currentScore() > this.state.highestScore()) {
             this.state.updateHighestScore();
           }

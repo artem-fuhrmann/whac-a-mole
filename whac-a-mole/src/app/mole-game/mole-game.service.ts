@@ -1,5 +1,6 @@
 import { inject, Injectable, OnInit } from '@angular/core';
-import { GameState, Mole, MoleStatus } from './state';
+import { GameState } from './mole-game.state';
+import { Mole, MoleStatus } from './mole-game.entities';
 
 @Injectable({
   providedIn: 'root',
@@ -20,15 +21,6 @@ export class MoleService {
     const inactiveMoles = updatedMoles.filter(
       (mole) => mole.state === 0 && mole.index !== pressedIndex
     );
-
-    // if (inactiveMoles.length > 0) {
-    //   const randomIndex =
-    //     inactiveMoles[Math.floor(Math.random() * inactiveMoles.length)].index;
-
-    //   return updatedMoles.map((mole) =>
-    //     mole.index === randomIndex ? { ...mole, state: 1 } : mole
-    //   );
-    // }
     this.state.updateMols(updatedMoles);
 
     return updatedMoles;
@@ -38,24 +30,6 @@ export class MoleService {
     const updatedMolls = this.calculateActiveMall(mole);
     this.state.updateMols(updatedMolls);
   }
-
-  // public updateMolesByLifeTime(timer: number): void {
-  //   const updatedMoles = this.state.moles().map((mole) => {
-  //     this.updateMolsAfterTrigger(mole);
-  //     // const updatedMolls = this.calculateActiveMall(mole);
-  //     // this.state.updateMols(updatedMolls);
-
-  //     // console.log(updatedMolls);
-  //     if (mole.lifeEnd && mole.lifeEnd > timer) {
-  //       return {
-  //         ...mole,
-  //         state: MoleStatus.Inactive,
-  //         lifeEnd: undefined,
-  //       };
-  //     }
-  //     return mole;
-  //   });
-  // }
 
   private _checkAndUpdateMoles() {
     const currentTime = this.state.timer();
