@@ -1,18 +1,22 @@
 import { patchState, signalStore, withMethods, withState } from '@ngrx/signals';
 import { randomizer } from './randomizer';
+import { inject } from '@angular/core';
+import { MoleService } from './mole.service';
 
 export type State = {
   highestScore: number;
   currentScore: number;
   resetTime: boolean;
-  moles: Array<Moles>;
+  moles: Array<Mole>;
   timer: number;
   started: boolean;
+  stopped: boolean;
 };
 
-export interface Moles {
+export interface Mole {
   state: MoleStatus;
   index: number;
+  lifeEnd?: number;
 }
 
 export enum MoleStatus {
@@ -24,25 +28,31 @@ const INITIAL_STATE: State = {
   highestScore: 0,
   currentScore: 0,
   resetTime: false,
-  moles: randomizer(),
+  moles: [],
   timer: 30,
   started: false,
+  stopped: false,
 };
 
 export const GameState = signalStore(
+  { providedIn: 'root' },
   withState(INITIAL_STATE),
   withMethods((store) => ({
     startGame() {
       patchState(store, (state) => ({
         ...state,
+        moles: randomizer(state),
         started: true,
+        stopped: false,
         timer: 30,
       }));
     },
     stopGame() {
       patchState(store, (state) => ({
         ...state,
+        currentScore: 0,
         started: false,
+        stopped: true,
         resetTime: true,
       }));
     },
@@ -51,13 +61,19 @@ export const GameState = signalStore(
         ...state,
         resetTime: false,
         currentScore: 0,
-        moles: randomizer(),
+        moles: randomizer(state),
       }));
     },
     incrementScore() {
       patchState(store, (state) => ({
         ...state,
         currentScore: state.currentScore + 1,
+      }));
+    },
+    decrementScore() {
+      patchState(store, (state) => ({
+        ...state,
+        currentScore: state.currentScore - 1,
       }));
     },
     decrementTimer() {
@@ -84,10 +100,22 @@ export const GameState = signalStore(
                 mole.state === MoleStatus.Active
                   ? MoleStatus.Inactive
                   : MoleStatus.Active,
+              lifeEnd:
+                mole.state === MoleStatus.Active
+                  ? mole.state - Math.floor(Math.random() * 3) + 1 < 0
+                    ? 0
+                    : state.timer - Math.floor(Math.random() * 3) + 1
+                  : undefined,
             };
           }
           return mole;
         }),
+      }));
+    },
+    updateMols(newMalsArray: Mole[]) {
+      patchState(store, (state) => ({
+        ...state,
+        moles: newMalsArray,
       }));
     },
   }))

@@ -1,8 +1,12 @@
 <app-score [currentScore]="currentScore()" [highestScore]="highestScore()" />
 
-@if (!gameStarted()) {
+@if (!gameStarted() && !gameStopped()) {
 <div class="game-start">
   <button (click)="startGame()">Start</button>
+</div>
+} @else if(!gameStarted() && gameStopped()) {
+<div class="game-start">
+  <button (click)="startGame()">Try again</button>
 </div>
 } @else if(gameStarted()) {
 <div class="game-grid">

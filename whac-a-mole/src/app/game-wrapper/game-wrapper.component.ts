@@ -16,6 +16,7 @@ export class GameWrapperComponent {
   public readonly state = inject(GameState);
 
   gameStarted = this.state.started;
+  gameStopped = this.state.stopped;
   molesArray = this.state.moles;
   currentScore = this.state.currentScore;
   highestScore = this.state.highestScore;
