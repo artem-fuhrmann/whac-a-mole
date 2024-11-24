@@ -24,7 +24,5 @@ export class GameWrapperComponent {
     this.gameStarted = true;
     this.timeLeft = 30;
     this.currentScore = 0;
-
-    // Add logic for game timer and mole activation
   }
 }
