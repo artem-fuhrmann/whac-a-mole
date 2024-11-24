@@ -1,4 +1,4 @@
-<app-score [currentScore]="currentScore" [highestScore]="highestScore" />
+<app-score [currentScore]="currentScore()" [highestScore]="highestScore()" />
 
 @if (!gameStarted()) {
 <div class="game-start">
@@ -6,7 +6,7 @@
 </div>
 } @else if(gameStarted()) {
 <div class="game-grid">
-  @for (mole of state.moles(); track $index) {
+  @for (mole of molesArray(); track $index) {
   <app-mole [mole]="mole" />
   }
 </div>
