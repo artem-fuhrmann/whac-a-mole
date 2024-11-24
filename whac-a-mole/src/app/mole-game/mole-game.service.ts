@@ -48,6 +48,9 @@ export class MoleService {
   }
 
   public updateGameField() {
+    if (this.state.stopped()) {
+      return;
+    }
     this._checkAndUpdateMoles();
     const shouldUpdate = Math.random() > 0.2;
     if (!shouldUpdate) return;

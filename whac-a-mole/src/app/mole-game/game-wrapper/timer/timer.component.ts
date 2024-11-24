@@ -31,14 +31,12 @@ export class TimerComponent {
           this.moleService.updateGameField();
           this.state.decrementTimer();
         });
-        console.log(this.$timer());
+
         if (this.$timer() === 0) {
-          console.log('STTOPED');
-          this.state.stopGame();
-          console.log(this.state.gameReplay());
           if (this.state.currentScore() > this.state.highestScore()) {
             this.state.updateHighestScore();
           }
+          this.state.stopGame();
         }
       },
       { allowSignalWrites: true }

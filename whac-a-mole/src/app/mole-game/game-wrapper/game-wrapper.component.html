@@ -1,5 +1,4 @@
 <app-score [currentScore]="currentScore()" [highestScore]="highestScore()" />
-
 @if (initialGame()) {
 <div class="game-start">
   <button (click)="startGame()">Start</button>
@@ -14,5 +13,7 @@
   <app-mole [mole]="mole" />
   }
 </div>
-<app-timer [$timer]="state.timer()" />
+<div class="timer-wrapper">
+  <app-timer [$timer]="state.timer()" />
+</div>
 }

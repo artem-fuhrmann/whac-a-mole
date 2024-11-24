@@ -2,13 +2,27 @@
   display: flex;
   justify-content: center;
   align-items: center;
-  height: 300px;
-  outline: 5px black solid;
+  height: 700px;
+  background-color: aqua;
+
+  & button {
+    font-size: 2em;
+  }
 }
 
 .game-grid {
   display: grid;
-  grid-template-columns: repeat(3, 160px);
-  gap: 50px;
+  grid-template-columns: repeat(3, 170px);
+  gap: 20px;
   justify-content: center;
+  align-items: center;
+  height: 700px;
+  background-color: aqua;
+}
+
+.timer-wrapper {
+  display: flex;
+  width: 100%;
+  justify-content: flex-end;
+  align-items: center;
 }

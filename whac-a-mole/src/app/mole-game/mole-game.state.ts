@@ -15,7 +15,7 @@ const INITIAL_STATE: State = {
   currentScore: 0,
   resetTime: false,
   moles: [],
-  timer: 5,
+  timer: 30,
   started: false,
   stopped: false,
 };
@@ -35,7 +35,7 @@ export const GameState = signalStore(
         moles: randomizer(state),
         started: true,
         stopped: false,
-        timer: 5,
+        timer: 30,
       }));
     },
     stopGame() {
@@ -68,7 +68,6 @@ export const GameState = signalStore(
       }));
     },
     decrementTimer() {
-      console.log('decrementTimer');
       patchState(store, (state) => ({
         ...state,
         timer: state.timer - 1,
