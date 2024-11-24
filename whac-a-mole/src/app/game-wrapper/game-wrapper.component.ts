@@ -15,7 +15,7 @@ import { TimerComponent } from '../timer/timer.component';
 export class GameWrapperComponent {
   public readonly state = inject(GameState);
 
-  gameStarted = true;
+  gameStarted = this.state.started;
   molesArray = Array(6).fill({ isActive: false });
   currentScore = 0;
   highestScore = 0;

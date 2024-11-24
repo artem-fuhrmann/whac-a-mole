@@ -1,15 +1,14 @@
 <app-score [currentScore]="currentScore" [highestScore]="highestScore" />
 
-@if (!gameStarted) {
+@if (!gameStarted()) {
 <div class="game-start">
   <button (click)="startGame()">Start</button>
 </div>
-} @else if(gameStarted) {
+} @else if(gameStarted()) {
 <div class="game-grid">
   @for (mole of state.moles(); track $index) {
   <app-mole [mole]="mole" />
   }
 </div>
-haha
 <app-timer [$timer]="state.timer()" />
 }
