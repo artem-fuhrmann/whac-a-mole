@@ -6,9 +6,10 @@
 </div>
 } @else if(gameStarted) {
 <div class="game-grid">
-  @for (mole of moles(); track $index) {
-  <app-mole [isActive]="mole.isActive"> </app-mole>
+  @for (mole of state.moles(); track $index) {
+  <app-mole [mole]="mole" />
   }
 </div>
-<p>Time left: {{ timeLeft }}s</p>
+haha
+<app-timer [$timer]="state.timer()" />
 }

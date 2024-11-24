@@ -1,4 +1,5 @@
 import { Component, input } from '@angular/core';
+import { Moles } from '../state/state';
 
 @Component({
   selector: 'app-mole',
@@ -8,11 +9,9 @@ import { Component, input } from '@angular/core';
   styleUrl: './mole.component.scss',
 })
 export class MoleComponent {
-  public readonly isActive = input.required<boolean>();
+  public readonly mole = input<Moles>();
 
   handleClick() {
-    if (this.isActive()) {
-      console.log('Mole clicked!');
-    }
+    return;
   }
 }
