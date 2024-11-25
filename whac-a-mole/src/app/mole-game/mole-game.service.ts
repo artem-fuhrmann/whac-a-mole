@@ -31,7 +31,7 @@ export class MoleService {
     this.state.updateMols(updatedMolls);
   }
 
-  private _checkAndUpdateMoles() {
+  private _checkAndUpdateMoles(): void {
     const currentTime = this.state.timer();
     const updatedMoles = this.state.moles().map((mole) => {
       if (mole.state === MoleStatus.Active && mole.lifeEnd! > currentTime) {
@@ -47,7 +47,7 @@ export class MoleService {
     this.state.updateMols(updatedMoles);
   }
 
-  public updateGameField() {
+  public updateGameField(): void {
     if (this.state.stopped()) {
       return;
     }

@@ -23,7 +23,7 @@ export class MoleComponent {
   public readonly state = inject(GameState);
   public readonly moleService = inject(MoleService);
 
-  public whackMole() {
+  public whackMole(): void {
     if (this.mole()?.state === 0) {
       return;
     }
