@@ -1,6 +1,6 @@
 import { inject } from '@angular/core';
 import { GameState } from './mole-game.state';
-import { Mole, State } from './mole-game.entities';
+import { Mole, MoleStatus, State } from './mole-game.entities';
 
 export const randomizer = (moleState: State): Mole[] => {
   const moles = [];
@@ -13,7 +13,7 @@ export const randomizer = (moleState: State): Mole[] => {
       state: currentMollStatus,
       index: i,
       lifeEnd:
-        currentMollStatus === 1
+        currentMollStatus === MoleStatus.Active
           ? moleState.timer - randomLifeTime < 0
             ? 0
             : moleState.timer - randomLifeTime

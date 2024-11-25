@@ -7,7 +7,7 @@ import {
 } from '@angular/core';
 import { GameState } from '../../mole-game.state';
 import { MoleService } from '../../mole-game.service';
-import { Mole } from '../../mole-game.entities';
+import { Mole, MoleStatus } from '../../mole-game.entities';
 
 @Component({
   selector: 'app-mole',
@@ -24,7 +24,7 @@ export class MoleComponent {
   public readonly moleService = inject(MoleService);
 
   public whackMole(): void {
-    if (this.mole()?.state === 0) {
+    if (this.mole()?.state === MoleStatus.Inactive) {
       return;
     }
     this.state.incrementScore();
